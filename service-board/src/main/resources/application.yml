@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: issueMoaBoard
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, info, metrics, prometheus
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG
+
+springdoc:
+  api-docs:
+    path: /board/v3/api-docs
+  swagger-ui:
+    path: /board/swagger-ui.html
+endpoint:
+  users:
+    info: http://192.168.0.31:17070/users/info

@@ -1,0 +1,32 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: board
+          uri: lb://ISSUEMOABOARD
+          predicates:
+            - Path=/board/**, /board-favorite/**, /inquiry/**, /keyword/**
+          filters:
+            - ClientAuthFilter
+        - id: users
+          uri: lb://ISSUEMOAUSERS
+          predicates:
+            - Path=/users/**, /login/**, /oauth/**, /oauth2/**, /settings/**
+          filters:
+            - ClientAuthFilter
+        - id: learning
+          uri: lb://ISSUEMOALEARNING
+          predicates:
+            - Path=/learning/**, /interview/**, /voca/**, /voca-learn/**, /grade-exp/**
+          filters:
+            - ClientAuthFilter
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    urls:
+      - url: /board/v3/api-docs
+        name: board
+      - url: /users/v3/api-docs
+        name: users
+      - url: /learning/v3/api-docs
+        name: learning

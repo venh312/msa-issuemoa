@@ -1,0 +1,17 @@
+server:
+  port: 17080
+spring:
+  application:
+    name: issueMoaLearning
+  config:
+    import:
+      - optional:configserver:http://issuemoa-config:8888
+
+eureka:
+  instance:
+    preferIpAddress: true # 서비스 이름 대신 서비스 IP 주소 등록
+  client:
+    registerWithEureka: true # 유레카 서비스 등록 여부 (default: true)
+    fetchRegistry: true # 레지스트리 사본을 로컬에 내려받기 (default: true)
+    serviceUrl:
+      defaultZone: http://issuemoa-eureka:8761/eureka # 유레카 서비스의 위치 설정

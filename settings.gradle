@@ -1,0 +1,8 @@
+rootProject.name = 'msa-issuemoa'
+include 'discovery-server'
+include 'issuemoa-common'
+include 'service-board'
+include 'service-gateway'
+include 'service-learning'
+include 'service-users'
+

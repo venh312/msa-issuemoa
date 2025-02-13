@@ -1,0 +1,11 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, info, metrics, prometheus
+
+springdoc:
+  api-docs:
+    path: /learning/v3/api-docs
+  swagger-ui:
+    path: /learning/swagger-ui.html

@@ -1,0 +1,9 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: issueMoaGateway
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://issuemoa-eureka:8761/eureka

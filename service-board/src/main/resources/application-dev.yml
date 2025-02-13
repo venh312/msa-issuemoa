@@ -1,0 +1,11 @@
+server:
+  port: 17060
+spring:
+  config:
+    import:
+      - optional:configserver:http://gate.issuemoa.kr:8888
+  kafka:
+    bootstrap-servers: 192.168.0.31:9092
+eureka:
+  client:
+    enabled: false

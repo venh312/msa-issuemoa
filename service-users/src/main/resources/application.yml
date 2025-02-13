@@ -1,0 +1,19 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, info, metrics, prometheus
+api:
+  endpoint:
+    recaptchaSiteVerify: https://www.google.com/recaptcha/api/siteverify
+  secret:
+    recaptcha: ENC(ykQJhpH7TtMuT4FeJjK+HlyFdHx/gQTO/tZvL4vLo+SRafL0OR2Dm+LJK0q9A1560qaM+flN2m8=)
+springdoc:
+  api-docs:
+    path: /users/v3/api-docs
+  swagger-ui:
+    path: /users/swagger-ui.html
+
+test:
+  users:
+    token: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjb25mMzEyQGtha2FvLmNvbSIsIm5hbWUiOiLslYzsiJjsl4bsnYwiLCJpZCI6NCwiYXV0aCI6IklTU1VFTU9BX1VTRVIiLCJleHAiOjE3MDQ5NzkzMjl9.gzXnASGdtoiVQgh57cJqnxREkVGZTFvade8ppCb_yTQKfTMNLashMxD5cZ8FvHPMFTNcC0arvXbQ-vqIxViyvQ

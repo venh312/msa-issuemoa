@@ -1,0 +1,12 @@
+server:
+  port: 17080
+spring:
+  application:
+    name: issueMoaLearning
+  config:
+    import:
+      - optional:configserver:http://gate.issuemoa.kr:8888
+
+eureka:
+  client:
+    enabled: false

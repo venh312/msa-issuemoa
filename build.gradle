@@ -1,0 +1,52 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.1'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+}
+
+// 빌드 루트 프로젝트 .jar 생성을 제한합니다.
+bootJar.enabled = false
+jar.enabled = false
+
+group = 'com.issuemoa'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+subprojects { // 모든 하위 모듈들에 이 설정을 적용합니다.
+//	group 'com.issuemoa'
+//	version '0.0.1-SNAPSHOT'
+//	sourceCompatibility = '17'
+//
+//	apply plugin: 'java'
+//	apply plugin: 'java-library'
+//	apply plugin: 'org.springframework.boot'
+//	apply plugin: 'io.spring.dependency-management'
+//
+//	configurations {
+//		compileOnly {
+//			extendsFrom annotationProcessor
+//		}
+//	}
+//
+//	repositories {
+//		mavenCentral()
+//	}
+//
+//	dependencies { // 모든 하위 모듈에 추가 될 의존성 목록입니다.
+//		implementation 'org.springframework.boot:spring-boot-starter'
+//		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//	}
+//
+//	test {
+//		useJUnitPlatform()
+//	}
+}
