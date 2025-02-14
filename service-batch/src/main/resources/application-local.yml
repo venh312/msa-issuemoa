@@ -1,0 +1,19 @@
+server:
+  port: 30010
+spring:
+  application:
+    name: issueMoaBatch
+  config:
+    import: optional:configserver:http://61.102.114.235:8888
+  batch:
+    job:
+      enabled: false
+    jdbc:
+      initialize-schema: always
+logging:
+  level:
+    root: info
+
+eureka:
+  client:
+    enabled: false

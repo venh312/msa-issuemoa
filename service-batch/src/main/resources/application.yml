@@ -1,0 +1,18 @@
+endpoint:
+  naver:
+    news:
+      rank: https://news.naver.com/main/ranking/popularDay.naver
+  google:
+    youtube:
+      popular: https://www.googleapis.com/youtube/v3/videos
+  open:
+    product:
+      info: http://openapi.price.go.kr/openApiImpl/ProductPriceInfoService/getProductInfoSvc.do
+      price: http://openapi.price.go.kr/openApiImpl/ProductPriceInfoService/getProductPriceInfoSvc.do
+      store: http://openapi.price.go.kr/openApiImpl/ProductPriceInfoService/getStoreInfoSvc.do
+
+cron:
+  expression:
+    naverNewsRank: 0 0 4 * * * # 매일 04시
+    youtubePopular: 0 0 3 * * 1,4 # 월요일(1), 목요일(4) 03시
+    keyword: 0 0 2 * * * # 매일 02시
