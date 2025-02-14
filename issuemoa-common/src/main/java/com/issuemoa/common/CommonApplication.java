@@ -1,4 +1,4 @@
-package com.issuemoa.common.jwt;
+package com.issuemoa.common;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

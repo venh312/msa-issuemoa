@@ -1,11 +1,11 @@
 package com.issuemoa.users.infrastructure.config;
 
+import com.issuemoa.common.jwt.TokenProvider;
 import com.issuemoa.users.application.OAuth2UsersService;
 import com.issuemoa.users.application.UsersService;
 import com.issuemoa.users.domain.redis.RedisRepository;
 import com.issuemoa.users.infrastructure.handler.OAuth2SuccessHandler;
 import com.issuemoa.users.presentation.filter.TokenAuthenticationFilter;
-import com.issuemoa.users.presentation.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,6 +1,6 @@
 package com.issuemoa.users.presentation.filter;
 
-import com.issuemoa.users.presentation.jwt.TokenProvider;
+import com.issuemoa.common.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
