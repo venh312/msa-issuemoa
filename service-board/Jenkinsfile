@@ -9,36 +9,38 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    git branch: "master", credentialsId: "conf-git", url: "https://github.com/conf312/issueMoa-board.git"
+                    git branch: "main", credentialsId: "conf-git", url: "https://github.com/venh312/msa-issuemoa.git"
                 }
             }
         }
         stage('Build') {
             steps {
                 script {
-                    sh "chmod 777 gradlew && ./gradlew bootJar"
+                    sh "chmod 777 gradlew"
+                    sh "./gradlew clean build"
                 }
             }
         }
         stage('Dokcer Image Build') {
             steps {
                 script {
-                    sh "docker build -t issuemoa/board ."
+                    sh "cd service-board"
+                    sh "docker build -t msa-issuemoa-board ."
                 }
             }
         }
         stage('Dokcer Run Conatiner') {
             steps {
                 script {
-                    def containerRunning = sh(script: 'docker inspect -f \'{{.State.Running}}\' issuemoa-board 2>/dev/null', returnStatus: true) == 0
+                    def containerRunning = sh(script: 'docker inspect -f \'{{.State.Running}}\' msa-issuemoa-board 2>/dev/null', returnStatus: true) == 0
 
                     if (containerRunning) {
                         echo 'Container is already running'
-                        sh "docker stop issuemoa-board"
-                        sh "docker rm issuemoa-board"
+                        sh "docker stop msa-issuemoa-board"
+                        sh "docker rm msa-issuemoa-board"
                     }
                     
-                    sh "docker run -d --name issuemoa-board -p 17060:17060 -v /home/venh/logs:/var/log --network issuemoa -e TZ=Asia/Seoul issuemoa/board"
+                    sh "docker run -d --name msa-issuemoa-board -p 17060:17060 -v /home/venh/logs:/var/log --network issuemoa -e TZ=Asia/Seoul msa-issuemoa-board"
                 }
             }
         }

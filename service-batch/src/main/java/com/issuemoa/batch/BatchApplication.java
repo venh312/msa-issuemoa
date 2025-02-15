@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @EnableBatchProcessing // 배치 활성화
 @SpringBootApplication
-public class IssueMoaBatchApplication {
+public class BatchApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(IssueMoaBatchApplication.class, args);
+		SpringApplication.run(BatchApplication.class, args);
 	}
 }
