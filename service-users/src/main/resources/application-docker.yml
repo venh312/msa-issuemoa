@@ -9,4 +9,4 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://issuemoa-eureka:8761/eureka
+      defaultZone: http://msa-issuemoa-discovery:8761/eureka
