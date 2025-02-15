@@ -24,12 +24,14 @@ pipeline {
         stage('Dokcer Image Build') {
             steps {
                 script {
+                    sh "pwd"
                     sh "cd service-board"
+                    sh "pwd"
                     sh "docker build -t msa-issuemoa-board ."
                 }
             }
         }
-        stage('Dokcer Run Conatiner') {
+        stage('Docker Run Container') {
             steps {
                 script {
                     def containerRunning = sh(script: 'docker inspect -f \'{{.State.Running}}\' msa-issuemoa-board 2>/dev/null', returnStatus: true) == 0
