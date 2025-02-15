@@ -9,36 +9,37 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    git branch: "master", credentialsId: "conf-git", url: "https://github.com/conf312/issueMoa-batch.git"
+                    git branch: "main", credentialsId: "conf-git", url: "https://github.com/venh312/msa-issuemoa.git"
                 }
             }
         }
         stage('Build') {
             steps {
                 script {
-                    sh "chmod 777 gradlew && ./gradlew bootJar"
+                    sh "chmod 777 gradlew"
+                    sh "./gradlew clean build"
                 }
             }
         }
-        stage('Dokcer Image Build') {
+        stage('Docker Image Build') {
             steps {
-                script {
-                    sh "docker build -t issuemoa/batch ."
+                dir('service-batch') {
+                    sh "docker build -t msa-issuemoa-batch ."
                 }
             }
         }
-        stage('Dokcer Run Conatiner') {
+        stage('Docker Run Container') {
             steps {
                 script {
-                    def containerRunning = sh(script: 'docker inspect -f \'{{.State.Running}}\' issuemoa-batch 2>/dev/null', returnStatus: true) == 0
+                    def containerRunning = sh(script: 'docker inspect -f \'{{.State.Running}}\' msa-issuemoa-batch 2>/dev/null', returnStatus: true) == 0
 
                     if (containerRunning) {
                         echo 'Container is already running'
-                        sh "docker stop issuemoa-batch"
-                        sh "docker rm issuemoa-batch"
+                        sh "docker stop msa-issuemoa-batch"
+                        sh "docker rm msa-issuemoa-batch"
                     }
                     
-                    sh "docker run -d --name issuemoa-batch -p 20010:20010 -v /home/venh/logs:/var/log --network issuemoa issuemoa/batch"
+                    sh "docker run -d --name msa-issuemoa-batch -p 20010:20010 -v /home/venh/logs:/var/log --network issuemoa msa-issuemoa-batch"
                 }
             }
         }
