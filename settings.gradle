@@ -6,4 +6,5 @@ include 'service-gateway'
 include 'service-learning'
 include 'service-users'
 include 'service-batch'
+include 'service-mail'
 

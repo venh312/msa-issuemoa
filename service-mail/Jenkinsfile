@@ -1,0 +1,74 @@
+pipeline {
+    agent any
+    
+    environment {
+        JAVA_HOME = "/usr/lib/jvm/java-17-openjdk-amd64"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    git branch: "main", credentialsId: "conf-git", url: "https://github.com/venh312/msa-issuemoa.git"
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                script {
+                    sh "chmod 777 gradlew && ./gradlew bootJar"
+                }
+            }
+        }
+        stage('Docker Image Build') {
+            steps {
+                dir('service-mail') {
+                    sh "docker build -t msa-issuemoa-mail ."
+                }
+            }
+        }
+        stage('Docker Run Container') {
+            steps {
+                script {
+                    def containerRunning = sh(script: 'docker inspect -f \'{{.State.Running}}\' msa-issuemoa-mail 2>/dev/null', returnStatus: true) == 0
+
+                    if (containerRunning) {
+                        echo 'Container is already running'
+                        sh "docker stop msa-issuemoa-mail"
+                        sh "docker rm msa-issuemoa-mail"
+                    }
+                    
+                    sh "docker run -d --name msa-issuemoa-mail -p 20020:20020 -v /home/venh/logs:/var/log --network issuemoa -e TZ=Asia/Seoul msa-issuemoa-mail "
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            script {
+                // 성공적인 빌드일 때 실행
+                def commitMessage = sh(script: "git log -1 --pretty=%B", returnStdout: true).trim()
+
+                slackSend (
+                    channel: '#이슈모아', 
+                    color: '#0100FF', 
+                    message: "😄 이슈모아 Build & Release 성공! \n 💻 ${commitMessage} \n ${env.JOB_NAME},  buildNumber: [${env.BUILD_NUMBER}]"
+                )
+            }
+        }
+        
+        failure {
+            script {
+                // 빌드 실패 시 실행
+                def commitMessage = sh(script: "git log -1 --pretty=%B", returnStdout: true).trim()
+
+                slackSend (
+                    channel: '#이슈모아', 
+                    color: '#FF0000', 
+                    message: "😱 이슈모아 Build & Release 실패! \n 💻 ${commitMessage} \n ${env.JOB_NAME},  buildNumber: [${env.BUILD_NUMBER}]"
+                )
+            }
+        }
+    }
+}
