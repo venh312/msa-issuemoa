@@ -88,9 +88,9 @@ public class TokenProvider {
         Claims claims = getClaims(accessToken);
 
         Map<String, Object> user = new HashMap<>();
-        user.put("id", (long) claims.get("id"));
+        user.put("id", claims.get("id"));
         user.put("email", claims.getSubject());
-        user.put("name", (String) claims.get("name"));
+        user.put("name", claims.get("name"));
 
         return user;
     }
@@ -101,6 +101,6 @@ public class TokenProvider {
         if (token.isEmpty()) return 0L;
 
         Claims claims = getClaims(token);
-        return ((Number) claims.get("id")).longValue();
+        return (Long) claims.get("id");
     }
 }
