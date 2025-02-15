@@ -24,22 +24,22 @@ pipeline {
         stage('Docker Image Build') {
             steps {
                 dir('service-gateway') {
-                    sh "docker build -t msa-issuemoa-board ."
+                    sh "docker build -t msa-issuemoa-gateway ."
                 }
             }
         }
         stage('Docker Run Container') {
             steps {
                 script {
-                    def containerRunning = sh(script: 'docker inspect -f \'{{.State.Running}}\' msa-issuemoa-board 2>/dev/null', returnStatus: true) == 0
+                    def containerRunning = sh(script: 'docker inspect -f \'{{.State.Running}}\' msa-issuemoa-gateway 2>/dev/null', returnStatus: true) == 0
 
                     if (containerRunning) {
                         echo 'Container is already running'
-                        sh "docker stop msa-issuemoa-board"
-                        sh "docker rm msa-issuemoa-board"
+                        sh "docker stop msa-issuemoa-gateway"
+                        sh "docker rm msa-issuemoa-gateway"
                     }
                     
-                    sh "docker run -d --name msa-issuemoa-board -p 8000:8000 -v /home/venh/logs:/var/log --network issuemoa -e TZ=Asia/Seoul msa-issuemoa-board"
+                    sh "docker run -d --name msa-issuemoa-gateway -p 8000:8000 -v /home/venh/logs:/var/log --network issuemoa -e TZ=Asia/Seoul msa-issuemoa-gateway"
                 }
             }
         }
