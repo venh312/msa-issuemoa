@@ -101,6 +101,6 @@ public class TokenProvider {
         if (token.isEmpty()) return 0L;
 
         Claims claims = getClaims(token);
-        return (Long) claims.get("id");
+        return ((Number) claims.get("id")).longValue();
     }
 }

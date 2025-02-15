@@ -95,7 +95,7 @@ public class UsersService {
         Map<String, Object> userInfoMap = tokenProvider.getUserInfo(token);
 
         return Users.builder()
-                .id((Long) userInfoMap.get("id"))
+                .id(((Number) userInfoMap.get("id")).longValue())
                 .email((String) userInfoMap.get("email"))
                 .name((String) userInfoMap.get("name"))
                 .build();
