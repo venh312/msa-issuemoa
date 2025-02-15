@@ -9,39 +9,39 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    git branch: "master", credentialsId: "conf-git", url: "https://github.com/conf312/issueMoa-eureka-server.git"
+                    git branch: "main", credentialsId: "conf-git", url: "https://github.com/venh312/msa-issuemoa.git"
                 }
             }
         }
         stage('Build') {
             steps {
                 script {
-                    sh "chmod 777 gradlew && ./gradlew bootJar"
+                    sh "chmod 777 gradlew"
+                    sh "./gradlew clean build"
                 }
             }
         }
-        stage('Dokcer Image Build') {
+        stage('Docker Image Build') {
             steps {
-                script {
-                    sh "docker build -t issuemoa/eureka ."
+                dir('service-batch') {
+                    sh "docker build -t msa-issuemoa-discovery ."
                 }
             }
         }
-        stage('Dokcer Run Conatiner') {
+        stage('Docker Run Container') {
             steps {
                 script {
-                    def containerRunning = sh(script: 'docker inspect -f \'{{.State.Running}}\' issuemoa-eureka 2>/dev/null', returnStatus: true) == 0
+                    def containerRunning = sh(script: 'docker inspect -f \'{{.State.Running}}\' msa-issuemoa-discovery 2>/dev/null', returnStatus: true) == 0
 
                     if (containerRunning) {
                         echo 'Container is already running'
-                        sh "docker stop issuemoa-eureka"
-                        sh "docker rm issuemoa-eureka"
+                        sh "docker stop msa-issuemoa-discovery"
+                        sh "docker rm msa-issuemoa-discovery"
                     }
                     
-                    sh "docker run -d --name issuemoa-eureka -p 8761:8761 --network issuemoa issuemoa/eureka"
+                    sh "docker run -d --name msa-issuemoa-discovery -p 8761:8761 --network issuemoa msa-issuemoa-discovery"
                 }
             }
         }
     }
-
 }
