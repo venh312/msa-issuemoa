@@ -1,0 +1,12 @@
+server:
+  port: 17090
+spring:
+  application:
+    name: issueMoaStore
+  config:
+    import:
+      - optional:configserver:http://gate.issuemoa.kr:8888
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://issuemoa-eureka:8761/eureka
