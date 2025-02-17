@@ -7,4 +7,5 @@ include 'service-learning'
 include 'service-users'
 include 'service-batch'
 include 'service-mail'
+include 'service-store'
 
