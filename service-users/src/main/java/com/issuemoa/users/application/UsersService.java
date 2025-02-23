@@ -54,8 +54,10 @@ public class UsersService {
         // 사용자 ID 조회
         String userId = redisRepository.findByKey(refreshToken);
 
-        if (!StringUtils.hasText(userId))
+        if (!StringUtils.hasText(userId)) {
+            signOut(request, response);
             throw new UsersNotFoundException("존재하지 않는 사용자입니다.");
+        }
 
         // 사용자 정보 조회
         Users user = usersRepository.findById(Long.valueOf(userId)).orElseThrow(() -> new UsersNotFoundException("존재하지 않는 사용자입니다."));
@@ -106,6 +108,7 @@ public class UsersService {
 
         if (StringUtils.hasText(refreshToken)) {
             // 쿠키 삭제
+            CookieUtil.deleteCookie(request, response, "authorization");
             CookieUtil.deleteCookie(request, response, Token.ACCESS_COOKIE_NAME.getValue());
             CookieUtil.deleteCookie(request, response, Token.REFRESH_COOKIE_NAME.getValue());
 
