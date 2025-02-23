@@ -18,7 +18,8 @@ public class BoardService {
 
     @Cacheable(value = "board", key = "#type + '_' + #skip + '_' + #limit", cacheManager = "contentCacheManager", unless = "#result == null || #result.isEmpty()")
     public List<BoardResponse> findByType(String type, int skip, int limit) {
-        PageRequest pageable = PageRequest.of(skip, limit, Sort.by("registerDateTime").descending());
+        PageRequest pageable = PageRequest.of(skip, limit,
+                Sort.by("registerDateTime").descending().and(Sort.by("_id").descending()));
         return boardRepository.findByType(type, pageable);
     }
 
