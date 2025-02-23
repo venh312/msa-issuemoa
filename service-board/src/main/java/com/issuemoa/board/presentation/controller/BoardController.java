@@ -31,11 +31,11 @@ public class BoardController {
     @GetMapping("/board/{type}")
     public ResponseEntity<Map<String, Object>> findAll(Locale locale,
             @Parameter(description = "news / youtube") @PathVariable("type") String type,
-            @Parameter(description = "페이지 번호 1씩 증가") @RequestParam(required = false, defaultValue = "0") Integer skip,
+            @Parameter(description = "페이지 번호 1씩 증가") @RequestParam(required = false, defaultValue = "1") Integer skip,
            @Parameter(description = "최대 개수") @RequestParam(required = false, defaultValue = "20") Integer limit) {
         //log.info("local message : {}", messages.getMessage("board.select.empty", null, locale));
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("list", boardService.findByType(type, skip, limit));
+        resultMap.put("list", boardService.findByType(type, skip - 1, limit));
         resultMap.put("totalPage", boardService.getTotalPage(type, limit));
         return ResponseEntity.ok(resultMap);
     }
