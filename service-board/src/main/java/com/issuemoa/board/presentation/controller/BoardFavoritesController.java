@@ -8,10 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -35,5 +32,14 @@ public class BoardFavoritesController {
     @GetMapping("/board/favorites")
     public ResponseEntity<List<BoardFavoritesResponse>> findByUserId(HttpServletRequest request){
         return ResponseEntity.ok(boardFavoritesService.findByUserId(request));
+    }
+
+    @Operation(summary = "관심 NEWS / YOUTUBE 삭제")
+    @DeleteMapping("/board/favorites/{id}")
+    public ResponseEntity<String> deleteByIdAndUserId(
+            HttpServletRequest request,
+            @PathVariable String id){
+            boardFavoritesService.deleteByIdAndUserId(request, id);
+        return ResponseEntity.ok(id);
     }
 }
