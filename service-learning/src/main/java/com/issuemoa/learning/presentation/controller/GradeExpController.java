@@ -26,7 +26,7 @@ public class GradeExpController {
         return ResponseEntity.ok(gradeExpService.findAll());
     }
 
-    @Operation(summary = "Grade Exp 조회(standard)", description = "standard 에 맞는 등급 경험치 정보를 불러온다.")
+    @Operation(summary = "현재 등급 조회", description = "현재 경험치에 맞는 등급을 반환한다.")
     @GetMapping("/grade-exp/{standard}")
     public ResponseEntity<GradeExpResponse> findTop1ByStandardLessThanEqualOrderByStandardDesc(@PathVariable("standard") int standard){
         return ResponseEntity.ok(gradeExpService.findTop1ByStandardLessThanEqualOrderByStandardDesc(standard));
