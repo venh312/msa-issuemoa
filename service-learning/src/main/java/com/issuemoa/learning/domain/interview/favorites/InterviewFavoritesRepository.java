@@ -14,4 +14,6 @@ public interface InterviewFavoritesRepository extends JpaRepository<InterviewFav
     List<Long> findInterviewFavoritesIdByRegisterId(@Param("registerId") Long registerId);
 
     Optional<InterviewFavorites> findByInterviewIdAndRegisterId(Long interviewId, Long registerId);
+
+    public void deleteByIdAndRegisterId(Long id, Long registerId);
 }

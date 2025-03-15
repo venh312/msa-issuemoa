@@ -48,4 +48,10 @@ public class InterviewFavoritesService {
 
         return interviewFavoritesRequest.interviewId();
     }
+
+    @Transactional
+    public void deleteByIdAndRegisterId(HttpServletRequest request, Long id) {
+        Long registerId = tokenProvider.getUserId(request);
+        interviewFavoritesRepository.deleteByIdAndRegisterId(id, registerId);
+    }
 }
