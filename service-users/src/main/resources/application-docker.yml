@@ -5,7 +5,7 @@ spring:
     name: issueMoaUsers
   config:
     import:
-      - optional:configserver:http://192.168.0.31:38888
+      - optional:configserver:http://gate.issuemoa.kr:38888
 eureka:
   client:
     serviceUrl:
