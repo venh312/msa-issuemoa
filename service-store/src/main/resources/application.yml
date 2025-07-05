@@ -1,5 +1,5 @@
 springdoc:
   api-docs:
-    path: /store/v3/api-docs
+    path: /stores/v3/api-docs
   swagger-ui:
-    path: /store/swagger-ui.html
+    path: /stores/swagger-ui.html

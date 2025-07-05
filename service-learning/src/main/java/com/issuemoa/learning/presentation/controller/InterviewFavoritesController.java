@@ -26,8 +26,17 @@ public class InterviewFavoritesController {
     @Operation(summary = "인터뷰 관심 등록/해제", description = "인터뷰 관심 등록/해제한다. (이미 등록되어 있을 경우 사용 여부(useYn)를 변경한다.")
     @PostMapping("/favorites")
     public ResponseEntity<Long> findByRegisterId(
-            HttpServletRequest request,
+                HttpServletRequest request,
                 @Valid @RequestBody InterviewFavoritesRequest interviewFavoritesRequest) {
         return ResponseEntity.ok(interviewFavoritesService.save(request, interviewFavoritesRequest));
+    }
+
+    @Operation(summary = "인터뷰 관심 삭제", description = "인터뷰 관심 목록을 삭제 한다.")
+    @DeleteMapping("/favorites/{id}")
+    public ResponseEntity<Long> deleteByIdAndRegisterId(
+                HttpServletRequest request,
+                @PathVariable Long id) {
+        interviewFavoritesService.deleteByIdAndRegisterId(request, id);
+        return ResponseEntity.ok(id);
     }
 }

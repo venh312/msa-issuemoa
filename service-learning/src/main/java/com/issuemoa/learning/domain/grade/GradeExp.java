@@ -17,7 +17,7 @@ public class GradeExp extends BaseTime {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String gradeCode;
-    private String standard;
+    private int standard;
     private Long registerId;
     private Long modifyId;
 }

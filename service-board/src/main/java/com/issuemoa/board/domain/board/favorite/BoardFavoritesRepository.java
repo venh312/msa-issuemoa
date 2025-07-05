@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface BoardFavoritesRepository extends MongoRepository<BoardFavorites, String> {
     List<BoardFavoritesResponse> findByUserId(Long userId, Sort sort);
+    void deleteByIdAndUserId(String id, Long userId);
 }

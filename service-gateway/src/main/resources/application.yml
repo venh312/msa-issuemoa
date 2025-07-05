@@ -20,6 +20,12 @@ spring:
             - Path=/learning/**, /interview/**, /voca/**, /voca-learn/**, /grade-exp/**
           filters:
             - ClientAuthFilter
+        - id: stores
+          uri: lb://ISSUEMOASTORE
+          predicates:
+            - Path=/stores/**
+          filters:
+            - ClientAuthFilter
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
@@ -30,3 +36,5 @@ springdoc:
         name: users
       - url: /learning/v3/api-docs
         name: learning
+      - url: /stores/v3/api-docs
+        name: stores

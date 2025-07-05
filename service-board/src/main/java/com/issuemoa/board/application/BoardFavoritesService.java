@@ -30,4 +30,9 @@ public class BoardFavoritesService {
         Long userId = tokenProvider.getUserId(request);
         return boardFavoritesRepository.findByUserId(userId, Sort.by(Sort.Direction.DESC, "registerDateTime"));
     }
+
+    public void deleteByIdAndUserId(HttpServletRequest request, String id) {
+        Long userId = tokenProvider.getUserId(request);
+        boardFavoritesRepository.deleteByIdAndUserId(id, userId);
+    }
 }
