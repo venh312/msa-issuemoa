@@ -14,4 +14,4 @@ eureka:
     registerWithEureka: true # 유레카 서비스 등록 여부 (default: true)
     fetchRegistry: true # 레지스트리 사본을 로컬에 내려받기 (default: true)
     serviceUrl:
-      defaultZone: http://msa-issuemoa-discovery:8761/eureka # 유레카 서비스의 위치 설정
+      defaultZone: http://msa-issuemoa-discovery:38761/eureka # 유레카 서비스의 위치 설정
