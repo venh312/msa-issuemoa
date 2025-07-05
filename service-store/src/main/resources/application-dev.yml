@@ -1,11 +1,11 @@
 server:
-  port: 17090
+  port: 37090
 spring:
   application:
     name: issueMoaStore
   config:
     import:
-      - optional:configserver:http://gate.issuemoa.kr:8888
+      - optional:configserver:http://gate.issuemoa.kr:38888
 eureka:
   client:
     enabled: false

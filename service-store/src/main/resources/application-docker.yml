@@ -1,12 +1,12 @@
 server:
-  port: 17090
+  port: 37090
 spring:
   application:
     name: issueMoaStore
   config:
     import:
-      - optional:configserver:http://gate.issuemoa.kr:8888
+      - optional:configserver:http://gate.issuemoa.kr:38888
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://msa-issuemoa-discovery:8761/eureka
+      defaultZone: http://msa-issuemoa-discovery:38761/eureka

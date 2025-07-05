@@ -1,5 +1,5 @@
 server:
-  port: 17060
+  port: 37060
 spring:
   config:
     import:

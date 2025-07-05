@@ -39,7 +39,7 @@ pipeline {
                         sh "docker rm msa-issuemoa-gateway"
                     }
                     
-                    sh "docker run -d --name msa-issuemoa-gateway -p 8000:8000 -v /home/venh/logs:/var/log --network issuemoa -e TZ=Asia/Seoul msa-issuemoa-gateway"
+                    sh "docker run -d --name msa-issuemoa-gateway -p 38000:38000 -v /home/venh/logs:/var/log --network issuemoa -e TZ=Asia/Seoul msa-issuemoa-gateway"
                 }
             }
         }

@@ -39,7 +39,7 @@ pipeline {
                         sh "docker rm msa-issuemoa-discovery"
                     }
                     
-                    sh "docker run -d --name msa-issuemoa-discovery -p 8761:8761 --network issuemoa msa-issuemoa-discovery"
+                    sh "docker run -d --name msa-issuemoa-discovery -p 38761:38761 --network issuemoa msa-issuemoa-discovery"
                 }
             }
         }

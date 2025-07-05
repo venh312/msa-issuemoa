@@ -1,5 +1,5 @@
 server:
-  port: 17080
+  port: 37080
 spring:
   application:
     name: issueMoaLearning

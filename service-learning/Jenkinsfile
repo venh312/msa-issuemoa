@@ -40,7 +40,7 @@ pipeline {
                         sh "docker rm msa-issuemoa-learning"
                     }
                     
-                    sh "docker run -d --name msa-issuemoa-learning -p 17080:17080 -v /home/venh/logs:/var/log --network issuemoa -e TZ=Asia/Seoul msa-issuemoa-learning"
+                    sh "docker run -d --name msa-issuemoa-learning -p 37080:37080 -v /home/venh/logs:/var/log --network issuemoa -e TZ=Asia/Seoul msa-issuemoa-learning"
                 }
             }
         }
