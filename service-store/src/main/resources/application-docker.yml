@@ -5,7 +5,7 @@ spring:
     name: issueMoaStore
   config:
     import:
-      - optional:configserver:http://issuemoa/config:38888
+      - optional:configserver:http://issuemoa-config:38888
 eureka:
   client:
     serviceUrl:
