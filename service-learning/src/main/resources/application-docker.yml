@@ -5,7 +5,7 @@ spring:
     name: issueMoaLearning
   config:
     import:
-      - optional:configserver:http://issuemoa-config:8888
+      - optional:configserver:http://issuemoa-config:38888
 
 eureka:
   instance:

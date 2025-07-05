@@ -4,7 +4,7 @@ spring:
   application:
     name: issueMoaBatch
   config:
-    import: optional:configserver:http://issuemoa-config:8888
+    import: optional:configserver:http://issuemoa-config:38888
   batch:
     job:
       enabled: false
