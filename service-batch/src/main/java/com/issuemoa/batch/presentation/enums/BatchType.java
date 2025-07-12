@@ -9,7 +9,9 @@ public enum BatchType {
     KEYWORD("keyword"),
     STORE("store"),
     PRODUCT("product"),
-    PRODUCT_PRICE("product-price");
+    PRODUCT_PRICE("product-price"),
+    SUBSIDY("subsidy"),
+    SUBSIDY_DETAIL("subsidy-detail");
 
     private final String value;
 
