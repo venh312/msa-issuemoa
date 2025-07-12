@@ -39,9 +39,10 @@ class StoreRepositoryCustomImpl(private val queryFactory: JPAQueryFactory): Stor
     }
 
     override fun findProducts(entpId: Long): List<ProductsResponse> {
-        return queryFactory
+          return queryFactory
             .select(
-                Projections.constructor(ProductsResponse::class.java,
+                Projections.constructor(
+                    ProductsResponse::class.java,
                     productsPrice.entpId,
                     products.goodsId,
                     products.name,
@@ -55,8 +56,18 @@ class StoreRepositoryCustomImpl(private val queryFactory: JPAQueryFactory): Stor
                 )
             )
             .from(products)
-            .join(productsPrice).on(productsPrice.goodsId.eq(products.goodsId))
-            .fetchJoin()
+            .join(productsPrice).on(
+                productsPrice.goodsId.eq(products.goodsId),
+                productsPrice.inspectDay.eq(
+                    JPAExpressions
+                        .select(productsPrice.inspectDay.max())
+                        .from(productsPrice)
+                        .where(
+                            productsPrice.goodsId.eq(products.goodsId),
+                            productsPrice.entpId.eq(entpId)
+                        )
+                )
+            )
             .where(productsPrice.entpId.eq(entpId))
             .fetch()
     }
