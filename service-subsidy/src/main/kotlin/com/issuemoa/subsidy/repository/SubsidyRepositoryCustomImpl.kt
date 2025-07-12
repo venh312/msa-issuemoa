@@ -1,7 +1,7 @@
 package com.issuemoa.subsidy.repository
 
-import com.issuemoa.subsidy.entity.QSubsidy
-import com.issuemoa.subsidy.entity.QSubsidyDetail
+import com.issuemoa.subsidy.entity.QSubsidy.subsidy
+import com.issuemoa.subsidy.entity.QSubsidyDetail.subsidyDetail
 import com.issuemoa.subsidy.response.SubsidyDetailResponse
 import com.issuemoa.subsidy.response.SubsidyResponse
 import com.querydsl.core.types.Projections
@@ -15,32 +15,32 @@ class SubsidyRepositoryCustomImpl(private val queryFactory: JPAQueryFactory): Su
             .select(
                 Projections.constructor(
                     SubsidyResponse::class.java,
-                    QSubsidy.subsidy.registrationDatetime,
-                    QSubsidy.subsidy.departmentName,
-                    QSubsidy.subsidy.userType,
-                    QSubsidy.subsidy.detailViewUrl,
-                    QSubsidy.subsidy.serviceId,
-                    QSubsidy.subsidy.serviceName,
-                    QSubsidy.subsidy.servicePurposeSummary,
-                    QSubsidy.subsidy.serviceCategory,
-                    QSubsidy.subsidy.eligibilityCriteria,
-                    QSubsidy.subsidy.responsibleAgencyName,
-                    QSubsidy.subsidy.responsibleAgencyType,
-                    QSubsidy.subsidy.responsibleAgencyCode,
-                    QSubsidy.subsidy.lastModifiedDatetime,
-                    QSubsidy.subsidy.applicationPeriod,
-                    QSubsidy.subsidy.applicationMethod,
-                    QSubsidy.subsidy.contactInfo,
-                    QSubsidy.subsidy.receivingAgency,
-                    QSubsidy.subsidy.viewCount,
-                    QSubsidy.subsidy.supportDetails,
-                    QSubsidy.subsidy.eligibleRecipients,
-                    QSubsidy.subsidy.supportType
+                    subsidy.registrationDatetime,
+                    subsidy.departmentName,
+                    subsidy.userType,
+                    subsidy.detailViewUrl,
+                    subsidy.serviceId,
+                    subsidy.serviceName,
+                    subsidy.servicePurposeSummary,
+                    subsidy.serviceCategory,
+                    subsidy.eligibilityCriteria,
+                    subsidy.responsibleAgencyName,
+                    subsidy.responsibleAgencyType,
+                    subsidy.responsibleAgencyCode,
+                    subsidy.lastModifiedDatetime,
+                    subsidy.applicationPeriod,
+                    subsidy.applicationMethod,
+                    subsidy.contactInfo,
+                    subsidy.receivingAgency,
+                    subsidy.viewCount,
+                    subsidy.supportDetails,
+                    subsidy.eligibleRecipients,
+                    subsidy.supportType
                 )
             )
-            .from(QSubsidy.subsidy)
-            .where(QSubsidy.subsidy.serviceCategory.`in`(serviceCategoryList))
-            .orderBy(QSubsidy.subsidy.registrationDatetime.desc())
+            .from(subsidy)
+            .where(subsidy.serviceCategory.`in`(serviceCategoryList))
+            .orderBy(subsidy.registrationDatetime.desc())
             .offset(offset)
             .limit(limit)
             .fetch()
@@ -51,32 +51,32 @@ class SubsidyRepositoryCustomImpl(private val queryFactory: JPAQueryFactory): Su
             .select(
                 Projections.constructor(
                     SubsidyResponse::class.java,
-                    QSubsidy.subsidy.registrationDatetime,
-                    QSubsidy.subsidy.departmentName,
-                    QSubsidy.subsidy.userType,
-                    QSubsidy.subsidy.detailViewUrl,
-                    QSubsidy.subsidy.serviceId,
-                    QSubsidy.subsidy.serviceName,
-                    QSubsidy.subsidy.servicePurposeSummary,
-                    QSubsidy.subsidy.serviceCategory,
-                    QSubsidy.subsidy.eligibilityCriteria,
-                    QSubsidy.subsidy.responsibleAgencyName,
-                    QSubsidy.subsidy.responsibleAgencyType,
-                    QSubsidy.subsidy.responsibleAgencyCode,
-                    QSubsidy.subsidy.lastModifiedDatetime,
-                    QSubsidy.subsidy.applicationPeriod,
-                    QSubsidy.subsidy.applicationMethod,
-                    QSubsidy.subsidy.contactInfo,
-                    QSubsidy.subsidy.receivingAgency,
-                    QSubsidy.subsidy.viewCount,
-                    QSubsidy.subsidy.supportDetails,
-                    QSubsidy.subsidy.eligibleRecipients,
-                    QSubsidy.subsidy.supportType
+                    subsidy.registrationDatetime,
+                    subsidy.departmentName,
+                    subsidy.userType,
+                    subsidy.detailViewUrl,
+                    subsidy.serviceId,
+                    subsidy.serviceName,
+                    subsidy.servicePurposeSummary,
+                    subsidy.serviceCategory,
+                    subsidy.eligibilityCriteria,
+                    subsidy.responsibleAgencyName,
+                    subsidy.responsibleAgencyType,
+                    subsidy.responsibleAgencyCode,
+                    subsidy.lastModifiedDatetime,
+                    subsidy.applicationPeriod,
+                    subsidy.applicationMethod,
+                    subsidy.contactInfo,
+                    subsidy.receivingAgency,
+                    subsidy.viewCount,
+                    subsidy.supportDetails,
+                    subsidy.eligibleRecipients,
+                    subsidy.supportType
                 )
             )
-            .from(QSubsidy.subsidy)
-            .where(QSubsidy.subsidy.supportType.contains(supportType))
-            .orderBy(QSubsidy.subsidy.registrationDatetime.desc())
+            .from(subsidy)
+            .where(subsidy.supportType.contains(supportType))
+            .orderBy(subsidy.registrationDatetime.desc())
             .offset(offset)
             .limit(limit)
             .fetch()
@@ -87,30 +87,30 @@ class SubsidyRepositoryCustomImpl(private val queryFactory: JPAQueryFactory): Su
             .select(
                 Projections.constructor(
                     SubsidyDetailResponse::class.java,
-                    QSubsidyDetail.subsidyDetail.publicServantDocument,
-                    QSubsidyDetail.subsidyDetail.requiredDocuments,
-                    QSubsidyDetail.subsidyDetail.contactInfo,
-                    QSubsidyDetail.subsidyDetail.legalBasis,
-                    QSubsidyDetail.subsidyDetail.personalVerificationDocs,
-                    QSubsidyDetail.subsidyDetail.serviceId,
-                    QSubsidyDetail.subsidyDetail.serviceName,
-                    QSubsidyDetail.subsidyDetail.servicePurpose,
-                    QSubsidyDetail.subsidyDetail.eligibilityCriteria,
-                    QSubsidyDetail.subsidyDetail.responsibleAgencyName,
-                    QSubsidyDetail.subsidyDetail.lastModifiedDate,
-                    QSubsidyDetail.subsidyDetail.applicationPeriod,
-                    QSubsidyDetail.subsidyDetail.applicationMethod,
-                    QSubsidyDetail.subsidyDetail.onlineApplicationUrl,
-                    QSubsidyDetail.subsidyDetail.localRegulation,
-                    QSubsidyDetail.subsidyDetail.receivingAgencyName,
-                    QSubsidyDetail.subsidyDetail.supportDetails,
-                    QSubsidyDetail.subsidyDetail.eligibleRecipients,
-                    QSubsidyDetail.subsidyDetail.supportType,
-                    QSubsidyDetail.subsidyDetail.administrativeRules
+                    subsidyDetail.publicServantDocument,
+                    subsidyDetail.requiredDocuments,
+                    subsidyDetail.contactInfo,
+                    subsidyDetail.legalBasis,
+                    subsidyDetail.personalVerificationDocs,
+                    subsidyDetail.serviceId,
+                    subsidyDetail.serviceName,
+                    subsidyDetail.servicePurpose,
+                    subsidyDetail.eligibilityCriteria,
+                    subsidyDetail.responsibleAgencyName,
+                    subsidyDetail.lastModifiedDate,
+                    subsidyDetail.applicationPeriod,
+                    subsidyDetail.applicationMethod,
+                    subsidyDetail.onlineApplicationUrl,
+                    subsidyDetail.localRegulation,
+                    subsidyDetail.receivingAgencyName,
+                    subsidyDetail.supportDetails,
+                    subsidyDetail.eligibleRecipients,
+                    subsidyDetail.supportType,
+                    subsidyDetail.administrativeRules
                 )
             )
-            .from(QSubsidyDetail.subsidyDetail)
-            .where(QSubsidyDetail.subsidyDetail.serviceId.eq(serviceId))
+            .from(subsidyDetail)
+            .where(subsidyDetail.serviceId.eq(serviceId))
             .fetchOne()
     }
 }
