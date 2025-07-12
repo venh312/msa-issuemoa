@@ -1,0 +1,11 @@
+server:
+  port: 37100
+spring:
+  application:
+    name: issueMoaSubsidy
+  config:
+    import:
+      - optional:configserver:http://192.168.219.101:38888
+eureka:
+  client:
+    enabled: false

@@ -1,0 +1,12 @@
+server:
+  port: 37100
+spring:
+  application:
+    name: issueMoaSubsidy
+  config:
+    import:
+      - optional:configserver:http://issuemoa-config:38888
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://msa-issuemoa-discovery:38761/eureka

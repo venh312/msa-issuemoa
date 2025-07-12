@@ -1,0 +1,5 @@
+springdoc:
+  api-docs:
+    path: /subsidy/v3/api-docs
+  swagger-ui:
+    path: /subsidy/swagger-ui.html
