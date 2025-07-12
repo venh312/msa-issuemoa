@@ -28,6 +28,8 @@ public class Scheduler {
     private final Job jobStore;
     private final Job jobProduct;
     private final Job jobProductPrice;
+    private final Job JobSubsidy;
+    private final Job JobSubsidyDetail;
     private final JobLauncher jobLauncher;
 
     @Scheduled(cron = "${cron.expression.naverNewsRank}")
@@ -111,6 +113,36 @@ public class Scheduler {
         try {
             log.info("[Scheduler 실행 => JobProductPrice]");
             jobLauncher.run(jobProductPrice, jobParameters);
+        } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException |
+                 JobParametersInvalidException e) {
+            log.error(e.getMessage());
+        }
+    }
+
+    @Scheduled(cron = "${cron.expression.keyword}")
+    public void startJobSubsidy() {
+        Map<String, JobParameter> jobParameterMap = new HashMap<>();
+        jobParameterMap.put("requestDate", new JobParameter(String.valueOf(LocalDateTime.now())));
+        JobParameters jobParameters = new JobParameters(jobParameterMap);
+
+        try {
+            log.info("[Scheduler 실행 => JobSubsidy]");
+            jobLauncher.run(JobSubsidy, jobParameters);
+        } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException |
+                 JobParametersInvalidException e) {
+            log.error(e.getMessage());
+        }
+    }
+
+    @Scheduled(cron = "${cron.expression.keyword}")
+    public void startJobSubsidyDetail() {
+        Map<String, JobParameter> jobParameterMap = new HashMap<>();
+        jobParameterMap.put("requestDate", new JobParameter(String.valueOf(LocalDateTime.now())));
+        JobParameters jobParameters = new JobParameters(jobParameterMap);
+
+        try {
+            log.info("[Scheduler 실행 => JobSubsidyDetail]");
+            jobLauncher.run(JobSubsidyDetail, jobParameters);
         } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException |
                  JobParametersInvalidException e) {
             log.error(e.getMessage());
