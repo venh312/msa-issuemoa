@@ -16,7 +16,7 @@ public class Subsidy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String registrationDatetime ;
+    private String registrationDatetime;
     private String departmentName;
     private String userType;
     private String detailViewUrl;

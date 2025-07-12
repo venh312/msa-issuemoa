@@ -26,6 +26,12 @@ spring:
             - Path=/stores/**
           filters:
             - ClientAuthFilter
+        - id: subsidy
+          uri: lb://ISSUEMOASUBSIDY
+          predicates:
+            - Path=/subsidy/**
+          filters:
+            - ClientAuthFilter
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
@@ -38,3 +44,5 @@ springdoc:
         name: learning
       - url: /stores/v3/api-docs
         name: stores
+      - url: /subsidy/v3/api-docs
+        name: subsidy
