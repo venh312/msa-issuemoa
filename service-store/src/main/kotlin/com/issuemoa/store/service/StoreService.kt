@@ -10,8 +10,12 @@ import org.springframework.stereotype.Service
 @Service
 class StoreService(private val storeRepository: StoreRepository) {
 
-    fun findStores(addr: String): List<StoresResponse> {
-        return storeRepository.findStores(addr)
+    fun findStoresByAddr(addr: String): List<StoresResponse> {
+        return storeRepository.findStoresByAddr(addr)
+    }
+
+    fun findStoresByEntpId(entpId: Long): StoresResponse? {
+        return storeRepository.findStoresByEntpId(entpId)
     }
 
     fun findProducts(entpId: Long): List<ProductsResponse> {

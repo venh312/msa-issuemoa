@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class StoreRepositoryCustomImpl(private val queryFactory: JPAQueryFactory): StoreRepositoryCustom {
-    override fun findStores(addr: String): List<StoresResponse> {
+    override fun findStoresByAddr(addr: String): List<StoresResponse> {
         return queryFactory
             .select(
                 Projections.constructor(StoresResponse::class.java,
@@ -36,6 +36,23 @@ class StoreRepositoryCustomImpl(private val queryFactory: JPAQueryFactory): Stor
                 .and(store.addr.contains(addr))
             )
             .fetch()
+    }
+
+    override fun findStoresByEntpId(entpId: Long): StoresResponse? {
+        return queryFactory
+            .select(
+                Projections.constructor(StoresResponse::class.java,
+                    store.entpId,
+                    store.name,
+                    store.tel,
+                    store.postNo,
+                    store.addr,
+                    store.addrDetail
+                )
+            )
+            .from(store)
+            .where(store.entpId.eq(entpId))
+            .fetchOne()
     }
 
     override fun findProducts(entpId: Long): List<ProductsResponse> {
@@ -69,6 +86,7 @@ class StoreRepositoryCustomImpl(private val queryFactory: JPAQueryFactory): Stor
                 )
             )
             .where(productsPrice.entpId.eq(entpId))
+            .orderBy(productsPrice.inspectDay.desc(), productsPrice.price.asc())
             .fetch()
     }
 

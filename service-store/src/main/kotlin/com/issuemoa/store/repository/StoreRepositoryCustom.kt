@@ -6,7 +6,8 @@ import com.issuemoa.store.dto.response.StoresByProductsPriceResponse
 import com.issuemoa.store.dto.response.StoresResponse
 
 interface StoreRepositoryCustom {
-    fun findStores(addr: String): List<StoresResponse>
+    fun findStoresByAddr(addr: String): List<StoresResponse>
+    fun findStoresByEntpId(entpId: Long): StoresResponse?
     fun findProducts(entpId: Long): List<ProductsResponse>
     fun findProductsUnit(): List<ProductsUnitResponse>
     fun findStoresByAddrAndGoodsId(addr: String, goodsId: Long): List<StoresByProductsPriceResponse>

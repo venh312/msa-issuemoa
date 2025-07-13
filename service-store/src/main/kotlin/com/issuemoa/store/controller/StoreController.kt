@@ -17,14 +17,25 @@ import org.springframework.web.bind.annotation.RestController
 class StoreController(private val storeService: StoreService) {
 
     @Operation(
-        summary = "마트/백화점 조회",
+        summary = "마트/백화점 조회 (다건)",
         description = "주소(addr)를 입력 받아 해당 지역의 마트/백화점 목록을 반환합니다.")
     @GetMapping("/stores/{addr}")
-    fun findStores(
+    fun findStoresByAddr(
         @Parameter(description = "서대문구, 강남구", example = "서대문구")
         @PathVariable addr: String
     ): List<StoresResponse> {
-        return storeService.findStores(addr)
+        return storeService.findStoresByAddr(addr)
+    }
+
+    @Operation(
+        summary = "마트/백화점 조회 (단건)",
+        description = "마켓ID(entpId)를 입력 받아 마트/백화점 정보를 반환합니다.")
+    @GetMapping("/stores/unit/{entpId}")
+    fun findStoresByEntpId(
+        @Parameter(description = "이마트연수점", example = "786")
+        @PathVariable entpId: Long
+    ): StoresResponse? {
+        return storeService.findStoresByEntpId(entpId)
     }
 
     @Operation(
@@ -54,7 +65,7 @@ class StoreController(private val storeService: StoreService) {
     @Operation(
         summary = "상품 단위 목록 조회",
         description = "상품 단위로 목록을 반환합니다.")
-    @GetMapping("/stores/products-unit")
+    @GetMapping("/stores/products/unit")
     fun findProductsUnit(): List<ProductsUnitResponse> {
         return storeService.findProductsUnit();
     }
