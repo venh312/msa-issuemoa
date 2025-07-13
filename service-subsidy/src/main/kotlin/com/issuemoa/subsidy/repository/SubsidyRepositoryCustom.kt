@@ -4,7 +4,17 @@ import com.issuemoa.subsidy.response.SubsidyDetailResponse
 import com.issuemoa.subsidy.response.SubsidyResponse
 
 interface SubsidyRepositoryCustom {
-    fun findByServiceCategory(serviceCategoryList: List<String>, offset: Long, limit: Long): List<SubsidyResponse>
-    fun findBySupportType(supportType: String, offset: Long, limit: Long): List<SubsidyResponse>
+    fun com.querydsl.core.types.dsl.BooleanExpression?.andIf(
+        condition: Boolean,
+        expressionSupplier: () -> com.querydsl.core.types.dsl.BooleanExpression
+    ): com.querydsl.core.types.dsl.BooleanExpression? {
+        return if (condition) {
+            this?.and(expressionSupplier()) ?: expressionSupplier()
+        } else {
+            this
+        }
+    }
+
+    fun findSubsidyByWhere(offset: Long, limit: Long, eligibleRecipients: String, serviceCategoryList: List<String>, supportType: String): List<SubsidyResponse>
     fun findByServiceId(serviceId: String): SubsidyDetailResponse?
 }

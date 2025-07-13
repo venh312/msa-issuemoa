@@ -7,12 +7,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class SubsidyService(private val subsidyRepository: SubsidyRepository) {
-    fun findByServiceCategoryList(serviceCategoryList: List<String>, offset: Long, limit: Long): List<SubsidyResponse> {
-        return subsidyRepository.findByServiceCategory(serviceCategoryList, offset, limit);
-    }
-
-    fun findBySupportType(supportType: String, offset: Long, limit: Long): List<SubsidyResponse> {
-        return subsidyRepository.findBySupportType(supportType, offset, limit);
+    fun findSubsidyByWhere(offset: Long, limit: Long, eligibleRecipients: String, serviceCategoryList: List<String>, supportType: String): List<SubsidyResponse> {
+        return subsidyRepository.findSubsidyByWhere(offset, limit, eligibleRecipients, serviceCategoryList, supportType);
     }
 
     fun findByServiceId(serviceId: String): SubsidyDetailResponse? {
