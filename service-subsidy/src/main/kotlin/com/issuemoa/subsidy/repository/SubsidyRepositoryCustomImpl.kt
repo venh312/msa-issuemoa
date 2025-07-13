@@ -11,16 +11,28 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class SubsidyRepositoryCustomImpl(private val queryFactory: JPAQueryFactory): SubsidyRepositoryCustom {
-    override fun findSubsidyByWhere(offset: Long, limit: Long, eligibleRecipients: String, serviceCategoryList: List<String>, supportType: String): List<SubsidyResponse> {
+    override fun findSubsidyByWhere(offset: Long, limit: Long, eligibleRecipients: List<String>, serviceCategoryList: List<String>, supportType: List<String>): List<SubsidyResponse> {
+        val eligibleRecipientsConditions = eligibleRecipients
+            .filter { it.isNotBlank() }
+            .distinct()
+            .map { subsidy.eligibleRecipients.contains(it) }
+            .reduceOrNull { acc, condition -> acc.or(condition) } // OR 조건으로 묶음
+
+        val supportTypeConditions = supportType
+            .filter { it.isNotBlank() }
+            .distinct()
+            .map { subsidy.supportType.contains(it) }
+            .reduceOrNull { acc, condition -> acc.or(condition) }  // OR 조건으로 묶음
+
         val predicate: BooleanExpression? = null
-            .andIf(eligibleRecipients.isNotBlank()) {
-                subsidy.eligibleRecipients.contains(eligibleRecipients)
+            .andIf(eligibleRecipientsConditions != null) {
+                eligibleRecipientsConditions
             }
             .andIf(serviceCategoryList.isNotEmpty()) {
                 subsidy.serviceCategory.`in`(serviceCategoryList)
             }
-            .andIf(supportType.isNotBlank()) {
-                subsidy.supportType.contains(supportType)
+            .andIf(supportTypeConditions != null) {
+                supportTypeConditions
             }
 
         return queryFactory
