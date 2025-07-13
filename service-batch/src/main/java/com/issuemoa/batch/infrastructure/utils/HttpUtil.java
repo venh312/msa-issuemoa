@@ -96,6 +96,7 @@ public class HttpUtil {
             HttpClient httpClient = HttpClient.newHttpClient();
             HttpRequest httpRequest = httpRequest(url, data, isPost, contentType, authorization);
             HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+            log.info("[sendAndReceiveXml] response :: {}", response);
             int statusCode = response.statusCode();
             if (statusCode == 200) {
                 DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

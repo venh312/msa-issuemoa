@@ -48,7 +48,7 @@ public class ProductPriceReader implements ItemReader<NodeList> {
             return null;
         }
 
-        String goodInspectDay = "20241220";
+        String goodInspectDay = "20250704";
         String entpId = stores.getContent().get(0).getEntpId();
         String url = endpointProductPrice + "?serviceKey=" + openApiKey + "&goodInspectDay=" + goodInspectDay + "&entpId=" + entpId;
 
