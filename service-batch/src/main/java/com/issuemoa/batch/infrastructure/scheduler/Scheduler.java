@@ -32,7 +32,7 @@ public class Scheduler {
     private final Job JobSubsidyDetail;
     private final JobLauncher jobLauncher;
 
-    @Scheduled(cron = "${cron.expression.naverNewsRank}")
+    @Scheduled(cron = "${cron.naverNewsRank}")
     public void startJobNaverNewsRank() {
         Map<String, JobParameter> jobParameterMap = new HashMap<>();
         jobParameterMap.put("requestDate", new JobParameter(String.valueOf(LocalDateTime.now())));
@@ -47,7 +47,7 @@ public class Scheduler {
         }
     }
 
-    @Scheduled(cron = "${cron.expression.youtubePopular}")
+    @Scheduled(cron = "${cron.youtubePopular}")
     public void startJobYoutubePopular() {
         Map<String, JobParameter> jobParameterMap = new HashMap<>();
         jobParameterMap.put("requestDate", new JobParameter(String.valueOf(LocalDateTime.now())));
@@ -62,7 +62,7 @@ public class Scheduler {
         }
     }
 
-    @Scheduled(cron = "${cron.expression.keyword}")
+    @Scheduled(cron = "${cron.keyword}")
     public void startJobMakeKeyword() {
         Map<String, JobParameter> jobParameterMap = new HashMap<>();
         jobParameterMap.put("requestDate", new JobParameter(String.valueOf(LocalDateTime.now())));
@@ -77,6 +77,7 @@ public class Scheduler {
         }
     }
 
+    @Scheduled(cron = "${cron.store}")
     public void startJobStore() {
         Map<String, JobParameter> jobParameterMap = new HashMap<>();
         jobParameterMap.put("requestDate", new JobParameter(String.valueOf(LocalDateTime.now())));
@@ -119,7 +120,7 @@ public class Scheduler {
         }
     }
 
-    @Scheduled(cron = "${cron.expression.keyword}")
+    @Scheduled(cron = "${cron.subsidy}")
     public void startJobSubsidy() {
         Map<String, JobParameter> jobParameterMap = new HashMap<>();
         jobParameterMap.put("requestDate", new JobParameter(String.valueOf(LocalDateTime.now())));
@@ -134,7 +135,7 @@ public class Scheduler {
         }
     }
 
-    @Scheduled(cron = "${cron.expression.keyword}")
+    @Scheduled(cron = "${cron.subsidyDetail}")
     public void startJobSubsidyDetail() {
         Map<String, JobParameter> jobParameterMap = new HashMap<>();
         jobParameterMap.put("requestDate", new JobParameter(String.valueOf(LocalDateTime.now())));

@@ -98,7 +98,6 @@ public class TaskletStores implements Tasklet, StepExecutionListener {
                     .xCoord(getTagValue("xMapCoord", element))
                     .yCoord(getTagValue("yMapCoord", element))
                     .registerId(0L)
-                    .registerTime(LocalDateTime.now())
                     .build();
             stores.add(store);
         }
@@ -123,6 +122,8 @@ public class TaskletStores implements Tasklet, StepExecutionListener {
         for (Store store : stores) {
             if (store.getEntpId() != null && existingIds.contains(store.getEntpId())) {
                 store.setModifyTime(now);
+            } else {
+                store.setRegisterTime(now);
             }
         }
 
@@ -139,7 +140,7 @@ public class TaskletStores implements Tasklet, StepExecutionListener {
 
     @Override
     public ExitStatus afterStep(StepExecution stepExecution) {
-        log.info("[TaskletSubsidyDetail 종료] Status => " + stepExecution.getStatus());
+        log.info("[TaskletStores 종료] Status => " + stepExecution.getStatus());
         return new ExitStatus(exitCode, exitMessage);
     }
 }
