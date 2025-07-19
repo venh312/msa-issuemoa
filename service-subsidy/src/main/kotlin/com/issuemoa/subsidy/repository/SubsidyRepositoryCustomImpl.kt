@@ -64,7 +64,7 @@ class SubsidyRepositoryCustomImpl(private val queryFactory: JPAQueryFactory): Su
             )
             .from(subsidy)
             .where(predicate)
-            .orderBy(subsidy.registrationDatetime.desc())
+            .orderBy(subsidy.registrationDatetime.desc(), subsidy.viewCount.desc())
             .offset(offset)
             .limit(limit)
             .fetch()
