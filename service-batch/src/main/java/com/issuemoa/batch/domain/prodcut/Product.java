@@ -9,14 +9,13 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Setter
 @Builder
 @Table(name = "products")
 @Entity
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String goodsId;
+    private Long goodsId;
     private String name;
     private String unitDivCode;
     private String baseCnt;

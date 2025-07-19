@@ -14,7 +14,9 @@ endpoint:
       list: https://api.odcloud.kr/api/gov24/v3/serviceList
       detail: https://api.odcloud.kr/api/gov24/v3/serviceDetail
 cron:
-  store: 0 0 5 1 * * # 매월 1일 05시
+  store: 0 20 5 1 * * # 매월 1일 05시 20분
+  product: 0 30 5 1 * * # 매월 1일 05시 30분
+  productPrice: 0 40 5 * * 6 # 매월 1일 05시 40분 (6: 토요일)
   subsidy: 0 0 5 * * * # 매일 05시
   subsidyDetail: 0 10 5 * * * # 매일 05시 10분
   naverNewsRank: 0 0 4 * * * # 매일 04시

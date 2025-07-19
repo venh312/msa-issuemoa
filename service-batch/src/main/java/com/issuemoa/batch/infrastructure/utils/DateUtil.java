@@ -15,6 +15,12 @@ public class DateUtil {
         return LocalDate.now().minusDays(1).atTime(LocalTime.MAX);
     }
 
+    public static String getYesterday() {
+        LocalDate yesterday = LocalDate.now().minusDays(1);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        return yesterday.format(formatter);
+    }
+
     /**
      * 현재로부터 한 달 전 금요일 날짜를 yyyyMMdd 형식으로 반환합니다.
      * @return 한 달 전 금요일 날짜 (yyyyMMdd 형식의 문자열)

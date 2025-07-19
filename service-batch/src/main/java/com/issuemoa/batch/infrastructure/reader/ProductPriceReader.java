@@ -10,16 +10,8 @@ import org.springframework.batch.item.ItemReader;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
-import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.ByteArrayInputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -36,7 +28,9 @@ public class ProductPriceReader implements ItemReader<NodeList> {
     private int page = 0;
 
     @Override
-    public NodeList read() {
+    public NodeList read() throws InterruptedException {
+        // 1초 대기
+        Thread.sleep(1000);
         log.info("==> [ProductPriceReader] API 호출 시작 Page :: {}", page);
         int size = 1;
 
@@ -48,7 +42,7 @@ public class ProductPriceReader implements ItemReader<NodeList> {
             return null;
         }
 
-        String goodInspectDay = "20250704";
+        String goodInspectDay = DateUtil.getYesterday();
         Long entpId = stores.getContent().get(0).getEntpId();
         String url = endpointProductPrice + "?serviceKey=" + openApiKey + "&goodInspectDay=" + goodInspectDay + "&entpId=" + entpId;
 
