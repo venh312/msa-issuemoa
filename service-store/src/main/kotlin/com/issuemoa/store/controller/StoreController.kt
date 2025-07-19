@@ -1,15 +1,19 @@
 package com.issuemoa.store.controller
 
-import com.issuemoa.store.dto.response.ProductsResponse
-import com.issuemoa.store.dto.response.ProductsUnitResponse
-import com.issuemoa.store.dto.response.StoresByProductsPriceResponse
-import com.issuemoa.store.dto.response.StoresResponse
+import com.issuemoa.store.controller.request.ProductsPriceRequest
+import com.issuemoa.store.controller.response.ProductsResponse
+import com.issuemoa.store.controller.response.ProductsUnitResponse
+import com.issuemoa.store.controller.response.StoresByProductsPriceResponse
+import com.issuemoa.store.controller.response.StoresResponse
+import com.issuemoa.store.controller.response.ProductPriceHistoryResponse
 import com.issuemoa.store.service.StoreService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
 @Tag(name = "Stores", description = "마트/백화점 API")
@@ -67,6 +71,16 @@ class StoreController(private val storeService: StoreService) {
         description = "상품 단위로 목록을 반환합니다.")
     @GetMapping("/stores/products/unit")
     fun findProductsUnit(): List<ProductsUnitResponse> {
-        return storeService.findProductsUnit();
+        return storeService.findProductsUnit()
+    }
+
+    @Operation(
+        summary = "상품 단위 가격 이력 조회",
+        description = "상품 단위로 가격 이력을 반환합니다.")
+    @PostMapping("/stores/products/price/history")
+    fun findProductsUnit(
+        @RequestBody request: ProductsPriceRequest
+    ): List<ProductPriceHistoryResponse> {
+        return storeService.findProductPriceHistoryBySearchDtAndGoodsId(request)
     }
 }

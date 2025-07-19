@@ -1,9 +1,11 @@
 package com.issuemoa.store.service
 
-import com.issuemoa.store.dto.response.ProductsResponse
-import com.issuemoa.store.dto.response.ProductsUnitResponse
-import com.issuemoa.store.dto.response.StoresByProductsPriceResponse
-import com.issuemoa.store.dto.response.StoresResponse
+import com.issuemoa.store.controller.request.ProductsPriceRequest
+import com.issuemoa.store.controller.response.ProductPriceHistoryResponse
+import com.issuemoa.store.controller.response.ProductsResponse
+import com.issuemoa.store.controller.response.ProductsUnitResponse
+import com.issuemoa.store.controller.response.StoresByProductsPriceResponse
+import com.issuemoa.store.controller.response.StoresResponse
 import com.issuemoa.store.repository.StoreRepository
 import org.springframework.stereotype.Service
 
@@ -23,11 +25,14 @@ class StoreService(private val storeRepository: StoreRepository) {
     }
 
     fun findProductsUnit(): List<ProductsUnitResponse> {
-        return storeRepository.findProductsUnit();
+        return storeRepository.findProductsUnit()
     }
 
     fun findStoresByAddrAndGoodsId(addr: String, goodsId: Long): List<StoresByProductsPriceResponse> {
         return storeRepository.findStoresByAddrAndGoodsId(addr, goodsId)
     }
 
+    fun findProductPriceHistoryBySearchDtAndGoodsId(request: ProductsPriceRequest): List<ProductPriceHistoryResponse> {
+        return storeRepository.findProductPriceHistoryBySearchDtAndGoodsId(request)
+    }
 }

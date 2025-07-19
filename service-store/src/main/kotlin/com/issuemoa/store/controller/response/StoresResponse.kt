@@ -1,4 +1,4 @@
-package com.issuemoa.store.dto.response
+package com.issuemoa.store.controller.response
 
 data class StoresResponse(
    val entpId: Long = 0,
