@@ -9,8 +9,6 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-import java.util.List;
-import java.util.Objects;
 
 @Slf4j
 @Component
@@ -28,19 +26,19 @@ public class ClientAuthFilter extends AbstractGatewayFilterFactory {
             log.info("[GatewayFilter] Port :: {}", request.getRemoteAddress().getPort());
 
             // [Swagger api-docs, OAuth2] PASS
-            if (!uri.contains("v3/api-docs") && !uri.contains("oauth2")) {
-                // Request Header 에 X-CLIENT-KEY가 존재하지 않을 때
-                if (!request.getHeaders().containsKey("X-CLIENT-KEY"))
-                    return handleUnAuthorized(exchange); // 401 Error
-
-                // Request Header 에서 X-CLIENT-KEY 문자열 받아오기
-                List<String> clientKey = request.getHeaders().get("X-CLIENT-KEY");
-                String clientKeyString = Objects.requireNonNull(clientKey).get(0);
-
-                // clientKey 검증
-                if (!clientKeyString.equals("SamQHPleQjbSKeyRvJWElcHJvamVjdCFA"))
-                    return handleUnAuthorized(exchange); // 토큰이 일치 하지 않을 때
-            }
+//            if (!uri.contains("v3/api-docs") && !uri.contains("oauth2")) {
+//                // Request Header 에 X-CLIENT-KEY가 존재하지 않을 때
+//                if (!request.getHeaders().containsKey("X-CLIENT-KEY"))
+//                    return handleUnAuthorized(exchange); // 401 Error
+//
+//                // Request Header 에서 X-CLIENT-KEY 문자열 받아오기
+//                List<String> clientKey = request.getHeaders().get("X-CLIENT-KEY");
+//                String clientKeyString = Objects.requireNonNull(clientKey).get(0);
+//
+//                // clientKey 검증
+//                if (!clientKeyString.equals("SamQHPleQjbSKeyRvJWElcHJvamVjdCFA"))
+//                    return handleUnAuthorized(exchange); // 토큰이 일치 하지 않을 때
+//            }
 
             return chain.filter(exchange).then(Mono.fromRunnable(() -> {
                 log.info("[GatewayFilter] Response Status Code ::  {}", response.getStatusCode());

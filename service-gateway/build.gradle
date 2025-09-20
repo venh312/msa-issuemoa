@@ -28,6 +28,8 @@ ext {
 }
 
 dependencies {
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+	implementation 'org.springframework.kafka:spring-kafka'
 	implementation 'javax.servlet:javax.servlet-api'
 	implementation 'org.springframework.boot:spring-boot-starter-logging'
 	implementation 'org.springdoc:springdoc-openapi-webflux-core:1.5.13'
