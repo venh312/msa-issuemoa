@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: issueMoaGateway
+  kafka:
+    bootstrap-servers: 192.168.219.101:9092
 eureka:
   client:
     serviceUrl:
