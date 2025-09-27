@@ -1,0 +1,22 @@
+server:
+  port: 37110
+spring:
+  application:
+    name: issueMoaApm
+  config:
+    import:
+      - optional:configserver:http://192.168.219.101:38888
+  kafka:
+    bootstrap-servers: 192.168.219.101:9092
+    consumer:
+      group-id: test-group
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, info, metrics, prometheus
+eureka:
+  client:
+    enabled: false

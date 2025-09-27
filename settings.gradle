@@ -9,4 +9,5 @@ include 'service-batch'
 include 'service-mail'
 include 'service-store'
 include 'service-subsidy'
+include 'service-apm'
 
