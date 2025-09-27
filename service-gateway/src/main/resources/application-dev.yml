@@ -7,5 +7,4 @@ spring:
     bootstrap-servers: 192.168.219.101:9092
 eureka:
   client:
-    serviceUrl:
-      defaultZone: http://192.168.219.101:38761/eureka
+    enabled: false
